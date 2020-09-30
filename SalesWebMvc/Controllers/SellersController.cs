@@ -6,16 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Models;
 using SalesWebMvc.Services;
 using SalesWebMvc.Data;
+using SalesWebMvc.Models.ViewModels;
+
 
 namespace SalesWebMvc.Controllers
 {
     public class SellersController : Controller
     {
         private readonly SellerService _sellerService;
+        private readonly DepartmentService _departmentService;
 
-        public SellersController(SellerService sellerService)
+        public SellersController(SellerService sellerService, DepartmentService departmentServices)
         {
             _sellerService = sellerService;
+            _departmentService = departmentServices;
         }
 
 
@@ -27,7 +31,9 @@ namespace SalesWebMvc.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View();
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
+            return View(viewModel);
         }
 
         [HttpPost]
