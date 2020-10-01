@@ -1,13 +1,11 @@
-﻿using System;
+﻿using SalesWebMvc.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SalesWebMvc.Data;
-using SalesWebMvc.Models;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Services.Exceptions;
-
-
+using SalesWebMvc.Data;
 
 namespace SalesWebMvc.Services
 {
@@ -19,7 +17,6 @@ namespace SalesWebMvc.Services
         {
             _context = context;
         }
-
 
         public async Task<List<Seller>> FindAllAsync()
         {
@@ -68,6 +65,5 @@ namespace SalesWebMvc.Services
                 throw new DbConcurrencyException(e.Message);
             }
         }
-
     }
 }
